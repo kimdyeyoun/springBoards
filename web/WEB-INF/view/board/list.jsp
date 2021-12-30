@@ -16,11 +16,29 @@
 
     <c:choose>
         <c:when test="${fn:length(requestScope.list) == 0}">
-            아무글없다
+            게시글이 없습니다.
         </c:when>
-        <c:when test="${fn:length(requestScope.list) != 0}">
-            글이있다
-        </c:when>
-    </c:choose>
+
+            <c:otherwise>
+                <table>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>조회수</th>
+                        <th>날짜</th>
+                    </tr>
+                    <c:forEach items="${requestScope.list}" var="item">
+                        <tr class="record" data-iboard="${item.iboard}">
+                            <td>${item.iboard}</td>
+                            <td><c:out value="${item.title}"/></td>
+                            <td>${item.hits}</td>
+                            <td>${item.rdt}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:otherwise>
+            </c:choose>
+
+        <script src="/res/js/board/list.js"></script>
 </body>
 </html>
